@@ -7,12 +7,16 @@ class ControllerTestimonialTestimonialForm extends Controller {
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
+		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/stylesheet/ym.css')) {
+			$this->document->addStyle('catalog/view/theme/' . $this->config->get('config_template') . '/stylesheet/testimonial.css');
+		} else {
+			$this->document->addStyle('catalog/view/theme/default/stylesheet/testimonial.css');
+		}
+
 		$this->load->model('testimonial/testimonial');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$this->model_testimonial_testimonial->addTestimonial($this->request->post);
-
-			$this->session->data['success'] = $this->language->get('text_success');
 
 			$this->redirect($this->url->link('testimonial/testimonial_form/success'));
 		}
