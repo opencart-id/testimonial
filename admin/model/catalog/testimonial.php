@@ -4,18 +4,36 @@ class ModelCatalogTestimonial extends Model {
 		$query = $this->db->query("SHOW TABLES LIKE '" . DB_PREFIX . "testimonial'");
 
 		if (!$query->num_rows) {
-			$this->db->query("CREATE TABLE `" . DB_PREFIX . "testimonial` (`testimonial_id` int(11) NOT NULL AUTO_INCREMENT, `name` varchar(64) NOT NULL, `location` varchar(64) NOT NULL, `url` varchar(128) NOT NULL, `image` varchar(128) NOT NULL, `description` text NOT NULL, `rating` int(1) NOT NULL, `date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00', `status` tinyint(1) NOT NULL, `sort_order` int(3) NOT NULL DEFAULT '0', PRIMARY KEY (`testimonial_id`)) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;");
+			$this->db->query("CREATE TABLE `" . DB_PREFIX . "testimonial` (`testimonial_id` int(11) NOT NULL AUTO_INCREMENT, `name` varchar(64) NOT NULL, `location` varchar(64) NOT NULL, `url` varchar(128) NOT NULL, `image` varchar(255) DEFAULT NULL, `description` text NOT NULL, `rating` int(1) NOT NULL, `date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00', `status` tinyint(1) NOT NULL, `sort_order` int(3) NOT NULL DEFAULT '0', PRIMARY KEY (`testimonial_id`)) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;");
 		}
 	}
 
 	public function addTestimonial($data) {
-		$this->db->query("INSERT INTO " . DB_PREFIX . "testimonial SET name = '" . $this->db->escape($data['name']) . "', location = '" . $this->db->escape($data['location']) . "', url = '" . $this->db->escape($data['url']) . "', image = '" . $this->db->escape(html_entity_decode($data['image'], ENT_QUOTES, 'UTF-8')) . "', description = '" . $this->db->escape($data['description']) . "', rating = '" . (int)$this->request->post['rating'] . "', date = NOW(), status = '" . (int)$this->request->post['status'] . "', sort_order = '" . (int)$this->request->post['sort_order'] . "'");
+		$this->db->query("INSERT INTO " . DB_PREFIX . "testimonial SET name = '" . $this->db->escape($data['name']) . "', location = '" . $this->db->escape($data['location']) . "', url = '" . $this->db->escape($data['url']) . "', description = '" . $this->db->escape($data['description']) . "', date = NOW(), status = '" . (int)$this->request->post['status'] . "', sort_order = '" . (int)$this->request->post['sort_order'] . "'");
+
+		$testimonial_id = $this->db->getLastId();
+		
+		if (isset($data['image'])) {
+			$this->db->query("UPDATE " . DB_PREFIX . "testimonial SET image = '" . $this->db->escape(html_entity_decode($data['image'], ENT_QUOTES, 'UTF-8')) . "' WHERE testimonial_id = '" . (int)$testimonial_id . "'");
+		}
+
+		if (isset($data['rating'])) {
+			$this->db->query("UPDATE " . DB_PREFIX . "testimonial SET rating = '" . (int)$this->request->post['rating'] . "' WHERE testimonial_id = '" . (int)$testimonial_id . "'");
+		}
 
 		$this->cache->delete('testimonial');
 	}
 
 	public function editTestimonial($testimonial_id, $data) {
-		$this->db->query("UPDATE " . DB_PREFIX . "testimonial SET name = '" . $this->db->escape($data['name']) . "', location = '" . $this->db->escape($data['location']) . "', url = '" . $this->db->escape($data['url']) . "', image = '" . $this->db->escape($data['image']) . "', description = '" . $this->db->escape($data['description']) . "', rating = '" . (int)$this->request->post['rating'] . "', status = '" . (int)$this->request->post['status'] . "', sort_order = '" . (int)$data['sort_order'] . "' WHERE testimonial_id = '" . (int)$testimonial_id . "'");
+		$this->db->query("UPDATE " . DB_PREFIX . "testimonial SET name = '" . $this->db->escape($data['name']) . "', location = '" . $this->db->escape($data['location']) . "', url = '" . $this->db->escape($data['url']) . "', description = '" . $this->db->escape($data['description']) . "', status = '" . (int)$this->request->post['status'] . "', sort_order = '" . (int)$data['sort_order'] . "' WHERE testimonial_id = '" . (int)$testimonial_id . "'");
+
+		if (isset($data['image'])) {
+			$this->db->query("UPDATE " . DB_PREFIX . "testimonial SET image = '" . $this->db->escape(html_entity_decode($data['image'], ENT_QUOTES, 'UTF-8')) . "' WHERE testimonial_id = '" . (int)$testimonial_id . "'");
+		}
+
+		if (isset($data['rating'])) {
+			$this->db->query("UPDATE " . DB_PREFIX . "testimonial SET rating = '" . (int)$this->request->post['rating'] . "' WHERE testimonial_id = '" . (int)$testimonial_id . "'");
+		}
 
 		$this->cache->delete('testimonial');
 	}

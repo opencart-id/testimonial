@@ -7,6 +7,12 @@ class ControllerTestimonialTestimonial extends Controller {
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
+		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/stylesheet/ym.css')) {
+			$this->document->addStyle('catalog/view/theme/' . $this->config->get('config_template') . '/stylesheet/testimonial.css');
+		} else {
+			$this->document->addStyle('catalog/view/theme/default/stylesheet/testimonial.css');
+		}
+
 		$this->data['breadcrumbs'] = array();
 
 		$this->data['breadcrumbs'][] = array(
@@ -44,14 +50,24 @@ class ControllerTestimonialTestimonial extends Controller {
 		$results = $this->model_testimonial_testimonial->getTestimonials(($page - 1) * $this->config->get('config_catalog_limit'), $this->config->get('config_catalog_limit'));
 
 		foreach ($results as $result) {
+			$url = '';
+
+			if ($result['url']) {
+				if (strpos($result['url'], "http://") !== false) {
+					$url = $result['url'];
+				} else {
+					$url = 'http://' . $result['url'];
+				}
+			}
+
 			$this->data['testimonials'][] = array(
 				'name'			=> $result['name'],
 				'location'		=> $result['location'],
-				'url'			=> (strpos($result['url'], "http://") !== false) ? $result['url'] : 'http://' . $result['url'],
+				'url'			=> $url,
 				'image'			=> $result['image'],
 				'description'	=> html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'),
 				'rating'		=> $result['rating'],
-				'date'			=> $result['date']
+				'date'			=> date($this->language->get('date_format_long'), strtotime($result['date']))
 			);
 		}
 
