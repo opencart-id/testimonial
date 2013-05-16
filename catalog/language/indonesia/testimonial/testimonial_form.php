@@ -1,31 +1,31 @@
 <?php
 // Heading
-$_['heading_title']        = 'Testimonial Form';
+$_['heading_title']			= 'Testimoni';
 
 // Text
-$_['text_message']         = '<p>Your testimonial has been successfully sent!</p><p>Once approved by the store owner, it will be displayed in <a href="%s">testimonial list</a>.</p>';
-$_['text_bad']             = 'Bad';
-$_['text_good']            = 'Good';
-$_['text_upload']          = 'Your image was successfully uploaded!';
+$_['text_message']			= '<p>Testimoni Anda berhasil dikirimkan!</p><p>Setelah disetujui, testimoni Anda akan ditampilkan di <a href="%s">daftar testimoni</a>.</p>';
+$_['text_bad']				= 'Buruk';
+$_['text_good']				= 'Bagus';
+$_['text_upload']			= 'Gambar Anda berhasil diupload!';
 
 // Entry Fields
-$_['entry_name']           = 'Your Name:';
-$_['entry_url']            = 'Website:';
-$_['entry_location']       = 'Location:';
-$_['entry_image']          = 'Image:';
-$_['entry_rating']         = 'Rating:';
-$_['entry_description']    = 'Your Testimonial:';
-$_['entry_captcha']        = 'Enter the code in the box below:';
+$_['entry_name']			= 'Nama Anda:';
+$_['entry_url']				= 'Situs:';
+$_['entry_location']		= 'Lokasi:';
+$_['entry_image']			= 'Gambar:';
+$_['entry_rating']			= 'Rating:';
+$_['entry_description']		= 'Testimoni Anda:';
+$_['entry_captcha']			= 'Masukkan kode verifikasi berikut:';
 
 // Button
-$_['button_upload']        = 'Upload Image';
-$_['button_submit']        = 'Submit Testimonial';
+$_['button_upload']			= 'Upload Gambar';
+$_['button_submit']			= 'Kirim Testimoni';
 
 // Errors
-$_['error_name']           = 'Name must be at least 3 and no more than 64 characters long!';
-$_['error_description']    = 'Your testimonial must be at least 10 and no more than 1000 characters long!';
-$_['error_captcha']        = 'Verification code does not match the image!';
-$_['error_upload']         = 'Upload required!';
-$_['error_filename']       = 'Filename must be between 3 and 128 characters!';
-$_['error_filetype']       = 'Invalid file type!';
+$_['error_name']			= 'Nama harus terdiri dari 3 s/d 64 karakter!';
+$_['error_description']		= 'Testimoni harus terdiri dari 10 s/d 1000 karakter!';
+$_['error_captcha']			= 'Kode verifikasi tidak sesuai gambar!';
+$_['error_upload']			= 'Upload diperlukan!';
+$_['error_filename']		= 'Nama gambar harus terdiri dari 3 s/d 64 karakter!';
+$_['error_filetype']		= 'Tipe gambar tidak valid!';
 ?>
