@@ -1,0 +1,53 @@
+<modification>
+	<id>Testimonial</id>
+	<version>1.0.0</version>
+	<vqmver>2.3.2</vqmver>
+	<author>http://www.opencart-id.com/</author>
+
+	<!-- Testimonial admin header menu start -->
+	<file name="admin/controller/common/header.php">
+		<operation info="Insert Testimonial menu in admin">
+			<search position="after"><![CDATA[
+			$this->data['zone'] = $this->url->link('localisation/zone', 'token=' . $this->session->data['token'], 'SSL');
+			]]></search>
+			<add><![CDATA[
+			$this->data['text_testimonial'] = $this->language->get('text_testimonial');
+			$this->data['testimonial'] = $this->url->link('catalog/testimonial', 'token=' . $this->session->data['token'], 'SSL');
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="admin/view/template/common/header.tpl">
+		<operation info="Insert Testimonial menu in admin">
+			<search position="after"><![CDATA[
+          <li><a href="<?php echo $information; ?>"><?php echo $text_information; ?></a></li>
+			]]></search>
+			<add><![CDATA[
+          <li><a href="<?php echo $testimonial; ?>"><?php echo $text_testimonial; ?></a></li>
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="admin/language/english/common/header.php">
+		<operation info="Insert Testimonial menu in admin">
+			<search position="before"><![CDATA[
+?>
+			]]></search>
+			<add><![CDATA[
+$_['text_testimonial']              = 'Testimonial';
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="admin/language/indonesia/common/header.php" error="skip">
+		<operation info="Insert Testimonial menu in admin">
+			<search position="before"><![CDATA[
+?>
+			]]></search>
+			<add><![CDATA[
+$_['text_testimonial']              = 'Testimonial';
+			]]></add>
+		</operation>
+	</file>
+	<!-- Testimonial admin header menu end -->
+</modification>
