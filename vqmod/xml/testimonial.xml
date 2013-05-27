@@ -50,4 +50,51 @@ $_['text_testimonial']              = 'Testimonial';
 		</operation>
 	</file>
 	<!-- Testimonial admin header menu end -->
+
+	<!-- Add Testimonial link start -->
+	<file name="catalog/controller/common/footer.php">
+		<operation info="Insert Testimonial menu in admin">
+			<search position="after"><![CDATA[
+		$this->language->load('common/footer');
+			]]></search>
+			<add><![CDATA[
+			$this->data['text_testimonial'] = $this->language->get('text_testimonial');
+			$this->data['testimonial'] = $this->url->link('testimonial/testimonial');
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="catalog/view/theme/default/template/common/footer.tpl">
+		<operation info="Insert Testimonial menu in admin">
+			<search position="before"><![CDATA[
+      <li><a href="<?php echo $contact; ?>"><?php echo $text_contact; ?></a></li>
+			]]></search>
+			<add><![CDATA[
+      <li><a href="<?php echo $testimonial; ?>"><?php echo $text_testimonial; ?></a></li>
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="catalog/language/english/common/footer.php">
+		<operation info="Insert Testimonial menu in admin">
+			<search position="before"><![CDATA[
+?>
+			]]></search>
+			<add><![CDATA[
+$_['text_testimonial']  = 'Testimonial';
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="catalog/language/indonesia/common/footer.php" error="skip">
+		<operation info="Insert Testimonial menu in admin">
+			<search position="before"><![CDATA[
+?>
+			]]></search>
+			<add><![CDATA[
+$_['text_testimonial']  = 'Testimonial';
+			]]></add>
+		</operation>
+	</file>
+	<!-- Add Testimonial link end -->
 </modification>
